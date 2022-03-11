@@ -1,48 +1,46 @@
 import React, { Component } from 'react';
 import './App.css';
-
-class Subject extends Component {
-  render(){
-    return (
-      <header className='App-header'>
-        <h1>{this.props.title}</h1>
-        {this.props.sub}
-      </header>
-    );
-  };
-};
-
-class List extends Component {
-  render(){
-    return(
-      <nav className='App-nav'>
-        <ul>
-          <li><a className='App-link' href='1.html'>HTML</a></li>
-          <li><a className='App-link' href='2.html'>CSS</a></li>
-          <li><a className='App-link' href='3.html'>REACT</a></li>
-        </ul>
-      </nav>
-    );
-  };
-};
-
-class Article extends Component {
-  render(){
-    return (
-      <footer className='App-footer'>
-
-      </footer>
-    )
-  }
-}
+import { List } from './components/list.js';
+import { Subject } from './components/subject.js';
+import { Article } from './components/article.js';
 
 class App extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      mode: {
+        isMain: true,
+        isContent : false
+      },
+      subject:{
+        title: 'WEB',
+        sub: 'world wide web!!'
+      },
+      list:[
+        { id : 1, title : 'HTML', desc: 'HTML is ...' },
+        { id : 2, title : 'CSS', desc: 'CSS is ...' },
+        { id : 3, title : 'REACT', desc: 'React.js is ...' }
+      ],
+    };
+  };
+
   render(){
+    var _title, _desc = null;
+    if(this.state.mode.isMain){
+      _title = 'Welcome!';
+      _desc = 'welcome to my react';
+    } else if(this.state.mode.isContent){
+      _title = this.state.list[0].title;
+      _desc = this.state.list[0].desc;
+    };
     return (
       <div className='App'>
-        <Subject title='WEB' sub='world wide web!!'></Subject>
-        <List></List>
-        <Article></Article>
+        <Subject
+          title={this.state.subject.title}
+          sub={this.state.subject.sub}>
+        </Subject>
+        <List data={this.state.list}></List>
+        <Article title={_title} desc={_desc}></Article>
       </div>
     );
   };

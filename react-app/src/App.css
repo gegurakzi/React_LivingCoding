@@ -27,8 +27,12 @@
 }
 
 
-.App-footer {
-  color: rgb(102, 222, 227);
+.App-article {
+  position: absolute;
+  top: 70vh;
+  width: 100%;
+  min-height: 30vh;
+  background-color: rgb(102, 222, 227);
 }
 
 .App-link {
